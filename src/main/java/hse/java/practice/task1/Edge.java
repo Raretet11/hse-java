@@ -73,7 +73,7 @@ public class Edge {
     public CubeColor[] getColumn(int i) {
         CubeColor[] result = new CubeColor[3];
         for (int j = 0; j < 3; j++) {
-            result[j] = parts[i][j];
+            result[j] = parts[j][i];
         }
         return result;
     }

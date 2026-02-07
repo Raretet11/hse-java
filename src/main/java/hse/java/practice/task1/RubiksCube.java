@@ -2,23 +2,11 @@ package hse.java.practice.task1;
 
 import java.util.Arrays;
 
-/**
- * Необходимо реализовать интерфейс Cube
- * При повороте передней грани, меняются верх низ право и лево
- */
 public class RubiksCube implements Cube {
 
     private static final int EDGES_COUNT = 6;
-
     private final Edge[] edges = new Edge[EDGES_COUNT];
 
-    /**
-     * Создать валидный собранный кубик
-     * грани разместить по ордеру в енуме цветов
-     * грань 0 -> цвет 0
-     * грань 1 -> цвет 1
-     * ...
-     */
     public RubiksCube() {
         CubeColor[] colors = CubeColor.values();
         for (int i = 0; i < 6; i++) {
@@ -185,24 +173,24 @@ public class RubiksCube implements Cube {
             CubeColor[] downColumn = edges[EdgePosition.DOWN.ordinal()].getColumn(2);
             CubeColor[] backColumn = edges[EdgePosition.BACK.ordinal()].getColumn(0);
 
-            edges[EdgePosition.UP.ordinal()].setColumn(2, frontColumn);
-            edges[EdgePosition.FRONT.ordinal()].setColumn(2, downColumn);
-            reverse(backColumn);
-            edges[EdgePosition.DOWN.ordinal()].setColumn(2, backColumn);
-            reverse(upColumn);
-            edges[EdgePosition.BACK.ordinal()].setColumn(0, upColumn);
-        } else {
-            CubeColor[] upColumn = edges[EdgePosition.UP.ordinal()].getColumn(2);
-            CubeColor[] frontColumn = edges[EdgePosition.FRONT.ordinal()].getColumn(2);
-            CubeColor[] downColumn = edges[EdgePosition.DOWN.ordinal()].getColumn(2);
-            CubeColor[] backColumn = edges[EdgePosition.BACK.ordinal()].getColumn(0);
-
             reverse(backColumn);
             edges[EdgePosition.UP.ordinal()].setColumn(2, backColumn);
             edges[EdgePosition.FRONT.ordinal()].setColumn(2, upColumn);
             edges[EdgePosition.DOWN.ordinal()].setColumn(2, frontColumn);
             reverse(downColumn);
             edges[EdgePosition.BACK.ordinal()].setColumn(0, downColumn);
+        } else {
+            CubeColor[] upColumn = edges[EdgePosition.UP.ordinal()].getColumn(2);
+            CubeColor[] frontColumn = edges[EdgePosition.FRONT.ordinal()].getColumn(2);
+            CubeColor[] downColumn = edges[EdgePosition.DOWN.ordinal()].getColumn(2);
+            CubeColor[] backColumn = edges[EdgePosition.BACK.ordinal()].getColumn(0);
+
+            edges[EdgePosition.UP.ordinal()].setColumn(2, frontColumn);
+            edges[EdgePosition.FRONT.ordinal()].setColumn(2, downColumn);
+            reverse(backColumn);
+            edges[EdgePosition.DOWN.ordinal()].setColumn(2, backColumn);
+            reverse(upColumn);
+            edges[EdgePosition.BACK.ordinal()].setColumn(0, upColumn);
         }
     }
 
