@@ -154,12 +154,12 @@ public class RubiksCube implements Cube {
         CubeColor[] backColumn = edges[EdgePosition.BACK.ordinal()].getColumn(0);
 
         if (direction == RotateDirection.CLOCKWISE) {
+            edges[EdgePosition.UP.ordinal()].setColumn(2, frontColumn);
+            edges[EdgePosition.FRONT.ordinal()].setColumn(2, downColumn);
             reverse(backColumn);
-            edges[EdgePosition.UP.ordinal()].setColumn(2, backColumn);
-            edges[EdgePosition.FRONT.ordinal()].setColumn(2, upColumn);
-            edges[EdgePosition.DOWN.ordinal()].setColumn(2, frontColumn);
-            reverse(downColumn);
-            edges[EdgePosition.BACK.ordinal()].setColumn(0, downColumn);
+            edges[EdgePosition.DOWN.ordinal()].setColumn(2, backColumn);
+            reverse(upColumn);
+            edges[EdgePosition.BACK.ordinal()].setColumn(0, upColumn);
         } else {
             edges[EdgePosition.UP.ordinal()].setColumn(2, frontColumn);
             edges[EdgePosition.FRONT.ordinal()].setColumn(2, downColumn);
