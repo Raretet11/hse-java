@@ -15,7 +15,7 @@ public class RandomSet<T> {
 
     private final Random random = new Random();
 
-    private static final int TABLE_SIZE = 10_000;
+    private static final int TABLE_SIZE = 100_000;
 
     private final Node<T>[] table;
     private Object[] values;
