@@ -13,6 +13,8 @@ public class RandomSet<T> {
         }
     }
 
+    private final Node<T> DELETED = new Node<>(null, -1);
+
     private final Random random = new Random();
 
     private Node<T>[] table;
@@ -39,7 +41,7 @@ public class RandomSet<T> {
         
         for (int i = 0; i < oldCapacity; i++) {
             Node<T> node = oldTable[i];
-            if (node != null) {
+            if (node != null && node != DELETED) {
                 T key = node.key;
                 int idx = key.hashCode() % capacity;
                 while (table[idx] != null) {
@@ -57,7 +59,7 @@ public class RandomSet<T> {
             if (entry == null) {
                 return -1;
             }
-            if (entry.key.equals(key)) {
+            if (entry != DELETED && entry.key.equals(key)) {
                 return index;
             }
             index = (index + 1) % capacity();
@@ -84,7 +86,7 @@ public class RandomSet<T> {
         }
 
         int i = hash(value);
-        while (table[i] != null) {
+        while (table[i] != null && table[i] != DELETED) {
             i = (i + 1) % capacity();
         }
 
@@ -103,7 +105,7 @@ public class RandomSet<T> {
         }
 
         int oldIndex = table[pos].index;
-        table[pos] = null;
+        table[pos] = (Node<T>) DELETED;
 
         if (oldIndex != size - 1) {
             T last = (T) values[size - 1];
