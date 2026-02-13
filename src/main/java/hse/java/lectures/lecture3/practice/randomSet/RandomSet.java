@@ -15,7 +15,7 @@ public class RandomSet<T> {
 
     private final Random random = new Random();
 
-    private static final int TABLE_SIZE = 100_000;
+    private static final int TABLE_SIZE = 500_000;
 
     private final Node<T>[] table;
     private Object[] values;
@@ -56,6 +56,9 @@ public class RandomSet<T> {
     }
 
     public boolean insert(T value) {
+        if (size == TABLE_SIZE) {
+            return false;
+        }
         if (index(value) != -1) {
             return false;
         }
